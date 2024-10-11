@@ -24,7 +24,7 @@ fun ButtonComp(
             println("Custom Button clicked!")
         },
         modifier = Modifier
-            .padding(16.dp)
+//            .padding(16.dp)
             .fillMaxWidth()
             .height(50.dp),
         colors = ButtonDefaults.buttonColors(
