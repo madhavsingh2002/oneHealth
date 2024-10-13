@@ -1,8 +1,16 @@
+package com.example.onehemlk.components
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -11,7 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -27,15 +37,17 @@ fun CustomTextField(
     imeAction: ImeAction = ImeAction.Done,
     singleLine: Boolean = true,            // Single line or multi-line
     onValueChange: (String) -> Unit,
-    keyboardType: KeyboardType
+    keyboardType: KeyboardType,
+    isPasswordField: Boolean = false       // New parameter to determine if it's a password field
 ) {
     var text by remember { mutableStateOf(initialText) }
+    var passwordVisible by remember { mutableStateOf(false) } // State for password visibility
     val focusManager: FocusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
-    val visualTransformation = if (keyboardType == KeyboardType.Password) {
-        PasswordVisualTransformation()  // Mask input for password
-    } else {
-        VisualTransformation.None  // No masking for other types
+
+    val visualTransformation = when {
+        isPasswordField && !passwordVisible -> PasswordVisualTransformation() // Hide password
+        else -> VisualTransformation.None  // Show text normally
     }
 
     OutlinedTextField(
@@ -54,7 +66,8 @@ fun CustomTextField(
             focusedBorderColor = Color.White,  // Customize specific colors if needed
             focusedLabelColor = Color.White,
             unfocusedTextColor = Color.White,
-            focusedTextColor = Color.White
+            focusedTextColor = Color.White,
+            cursorColor= Color.White
         ),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = imeAction,
@@ -65,6 +78,17 @@ fun CustomTextField(
                 focusManager.clearFocus()  // Clear focus when "Done" is pressed
             }
         ),
-        visualTransformation = visualTransformation
+        visualTransformation = visualTransformation,
+        trailingIcon = {
+            if (isPasswordField) {
+                // Toggle password visibility when the image is clicked
+                Image(
+                    painter = if (passwordVisible) painterResource( com.example.onehemlk.R.drawable.visibility) else painterResource(com.example.onehemlk.R.drawable.visiblity_off),
+                    contentDescription = if (passwordVisible) "Hide password" else "Show password",
+                    modifier = Modifier.height(30.dp).clickable { passwordVisible = !passwordVisible },
+                    contentScale = ContentScale.Fit
+                )
+            }
+        }
     )
 }

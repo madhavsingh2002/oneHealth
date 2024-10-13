@@ -1,9 +1,7 @@
 package com.example.onehemlk.Pages
-
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,7 +30,7 @@ import com.example.onehemlk.components.CustomTextField
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun LoginPage(){
+fun RegisterPage(){
     var userInput by remember { mutableStateOf("") }
     var passwordInput by remember { mutableStateOf("") }
     Scaffold(
@@ -48,10 +46,20 @@ fun LoginPage(){
                     .imePadding()
             ) {
                 item{
-                    Text(text = "Log in to your account!", fontWeight = FontWeight.Bold, fontSize = 22.sp, color = MaterialTheme.colorScheme.onPrimary)
+                    Text(text = "Create an account", fontWeight = FontWeight.Bold, fontSize = 22.sp, color = MaterialTheme.colorScheme.onPrimary)
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = "Welcome back! Please enter your details", fontSize = 16.sp, color = Color(0xFFBEBEBE))
+                    Text(text = "Welcome! Please enter your details", fontSize = 16.sp, color = Color(0xFFBEBEBE))
                     Spacer(modifier = Modifier.height(24.dp))
+                    Text(text = "Name", fontSize = 14.sp, color = MaterialTheme.colorScheme.onPrimary)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    CustomTextField(
+                        placeholder = "Enter your name",
+                        initialText = "",
+                        keyboardType = KeyboardType.Email,
+                        onValueChange = {
+                            userInput = it
+                        }
+                    )
                     Text(text = "Email", fontSize = 14.sp, color = MaterialTheme.colorScheme.onPrimary)
                     Spacer(modifier = Modifier.height(4.dp))
                     CustomTextField(
@@ -75,16 +83,16 @@ fun LoginPage(){
                         isPasswordField = true
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    ButtonComp(label = "Login", isborder = false)
+                    ButtonComp(label = "Sign Up", isborder = false)
                     Spacer(modifier = Modifier.height(16.dp))
-                    ButtonComp(label = "Log in with Google", isborder = true)
+                    ButtonComp(label = "Sign up with Google", isborder = true)
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(
                         horizontalArrangement = Arrangement.Center,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text(text = "Don't have an account?", fontSize = 14.sp, color = Color(0xFFA9A9A9))
-                        Text(text = " Sign Up", fontSize = 14.sp, color = MaterialTheme.colorScheme.secondary)
+                        Text(text = "Already have an account?", fontSize = 14.sp, color = Color(0xFFA9A9A9))
+                        Text(text = " Log in", fontSize = 14.sp, color = MaterialTheme.colorScheme.secondary)
                     }
                 }
             }
