@@ -1,16 +1,13 @@
 package com.example.onehemlk.Pages
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -24,11 +21,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.onehemlk.R
 import com.example.onehemlk.components.ButtonComp
 
 @Composable
-fun GetStartedPage() {
+fun GetStartedPage(navController: NavHostController) {
     Scaffold(
         modifier = Modifier.fillMaxSize(), // Scaffold modifier
         content = { paddingValues ->  // Content block of the Scaffold
@@ -38,6 +36,7 @@ fun GetStartedPage() {
                 modifier = Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.primary)
+                    .padding(16.dp)
                     .padding(paddingValues)  // Apply scaffold's padding
             ) {
                 Image(
@@ -49,10 +48,11 @@ fun GetStartedPage() {
                 Spacer(modifier = Modifier.height(42.dp))
                 Text(text = "Let's get started!", fontWeight = FontWeight.Bold, fontSize = 22.sp, color = MaterialTheme.colorScheme.onPrimary)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Log in to enjoy the features we've \n provided and be well", fontSize = 16.sp, color = Color(0xFFE8E9EB), textAlign = TextAlign.Center)
+                Text(text = "Log in to enjoy the features we've \n provided and be well", fontSize = 16.sp, color = Color(0xFFA9A9A9), textAlign = TextAlign.Center)
                 Spacer(modifier = Modifier.height(52.dp))
-                ButtonComp(label = "Login", isborder = false)
-                ButtonComp(label = "Sign Up", isborder = true)
+                ButtonComp(label = "Login", isborder = false, onClick = { navController.navigate("login") })
+                Spacer(modifier = Modifier.height(16.dp))
+                ButtonComp(label = "Sign Up", isborder = true, onClick = { navController.navigate("register") })
             }
         }
     )

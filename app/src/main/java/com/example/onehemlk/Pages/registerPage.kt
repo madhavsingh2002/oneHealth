@@ -1,6 +1,7 @@
 package com.example.onehemlk.Pages
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,12 +26,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.onehemlk.components.ButtonComp
 import com.example.onehemlk.components.CustomTextField
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun RegisterPage(){
+fun RegisterPage(navController: NavHostController){
     var userInput by remember { mutableStateOf("") }
     var passwordInput by remember { mutableStateOf("") }
     Scaffold(
@@ -83,16 +85,16 @@ fun RegisterPage(){
                         isPasswordField = true
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    ButtonComp(label = "Sign Up", isborder = false)
+                    ButtonComp(label = "Sign Up", isborder = false, onClick = {})
                     Spacer(modifier = Modifier.height(16.dp))
-                    ButtonComp(label = "Sign up with Google", isborder = true)
+                    ButtonComp(label = "Sign up with Google", isborder = true, onClick = {})
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(
                         horizontalArrangement = Arrangement.Center,
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text(text = "Already have an account?", fontSize = 14.sp, color = Color(0xFFA9A9A9))
-                        Text(text = " Log in", fontSize = 14.sp, color = MaterialTheme.colorScheme.secondary)
+                        Text(text = " Log in", fontSize = 14.sp, color = MaterialTheme.colorScheme.secondary, modifier = Modifier.clickable{navController.navigate("login"){ popUpTo("register") { inclusive = true } } })
                     }
                 }
             }

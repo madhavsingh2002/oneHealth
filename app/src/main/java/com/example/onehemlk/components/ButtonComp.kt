@@ -17,12 +17,11 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ButtonComp(
     label: String,
-    isborder: Boolean
+    isborder: Boolean,
+    onClick: ()->Unit
 ) {
     Button(
-        onClick = {
-            println("Custom Button clicked!")
-        },
+        onClick = onClick,
         modifier = Modifier
 //            .padding(16.dp)
             .fillMaxWidth()

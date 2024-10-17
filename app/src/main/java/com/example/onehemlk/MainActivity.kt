@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import com.example.onehemlk.Pages.MyApp
 import com.example.onehemlk.Pages.RegisterPage
 import com.example.onehemlk.ui.theme.OneHeMLKTheme
 
@@ -20,9 +21,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             OneHeMLKTheme {
                 Scaffold(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
-                    //GetStartedPage()
+                    MyApp()
+                //GetStartedPage()
                     //LoginPage()
-                    RegisterPage()
+//                    RegisterPage()
                 }
             }
         }
